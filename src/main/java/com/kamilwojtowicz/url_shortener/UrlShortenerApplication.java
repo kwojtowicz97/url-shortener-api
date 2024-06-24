@@ -16,7 +16,7 @@ public class UrlShortenerApplication {
 	class HomeController {
 		@GetMapping("/")
 		public String home() {
-			return "Hello URL shortener!";
+			return "Hello URL shortener! GH Actions work!";
 		}
 	}
 
