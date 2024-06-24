@@ -43,4 +43,4 @@ jobs:
             docker pull kwojtowicz/url-shortener:latest
             docker stop url-shortener-app-api || true
             docker rm url-shortener-app-api || true
-            docker run -d -p 8080:8000 --name url-shortener-app-api kwojtowicz/url-shortener:latest
+            docker run -d -v /home/ec2-user/apps_config/url-shortener/config:/config -e "SPRING_CONFIG_LOCATION=/config/application.properties"  -p 8000:8080 --name url-shortener-app-api kwojtowicz/url-shortener:latest
