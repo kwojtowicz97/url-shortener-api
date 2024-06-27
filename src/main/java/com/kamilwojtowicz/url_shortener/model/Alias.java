@@ -61,4 +61,7 @@ public class Alias {
         this.shortUrl = shortUrl;
         this.originalUrl = originalUrl;
     }
+
+    public Alias() {
+    }
 }

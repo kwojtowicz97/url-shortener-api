@@ -23,4 +23,12 @@ public class AliasService {
 
         return shortUrl;
     }
+
+    public String getRedirectUrl(String alias) {
+        Alias aliasRecord = aliasRepository.findByShortUrl(alias);
+        if (aliasRecord == null) {
+            return null;
+        }
+        return aliasRecord.getOriginalUrl();
+    }
 }
