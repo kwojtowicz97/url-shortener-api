@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>URL Shortener</title>
+    <script>
+        async function submitForm(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const formObject = Object.fromEntries(formData.entries());
+            const response = await fetch('/api/shorten', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    url: formObject.url
+                })
+            });
+
+            if (response.ok) {
+                const responseData = await response.json();
+                document.getElementById('result').textContent = window.location.origin + '/' + responseData.shortUrl;
+                document.getElementById('result').href = window.location.origin + '/' + responseData.shortUrl;
+            } else {
+                document.getElementById('result').textContent = 'Error: ' + response.statusText;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Form Submission with Fetch</h1> 
+    <form th:action="@{/shorten}" method="post" onsubmit="submitForm(event)">
+        <label for="url">Url to shorten:</label>
+        <input type="text" id="url" name="url" required><br>
+        
+        <button type="submit">Submit</button>
+    </form>
+    <a href="" id="result"></div>
+</body>
+</html>
